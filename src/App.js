@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
+import AppCss from './App.module.css';
 import UserInput from "./Components/UserInput/UserInput";
 import UserOutput from "./Components/UserOutput/UserOutput";
 import ValidationComponent from "./Components/ValidationComponent/ValidationComponent";
@@ -38,8 +38,18 @@ function App() {
             letter={letter}/>
     })
 
+    const lightWord = [];
+
+    if (word.length <= 2) {
+        lightWord.push(AppCss.red);
+    }
+
+    if (word.length <= 1) {
+        lightWord.push(AppCss.bold);
+    }
+
     return (
-        <div className="App">
+        <div className={AppCss.App}>
             <div>
                 <h3>Exercise Section 3</h3>
                 <UserInput userChangeHandler={userChangeHandler} user={user}/>
@@ -52,10 +62,16 @@ function App() {
                 <h3>Exercise Section 4</h3>
                 <input type="text" onChange={(event) => wordHandler(event)} value={word}/>
 
-                <p>The length of `{word}` is {wordLength}</p>
+                <p className={lightWord.join(' ')}>The length of `{word}` is {wordLength}</p>
                 <ValidationComponent wordLength={wordLength}/>
 
                 {charComponent}
+            </div>
+
+            <div>
+                <h4>Exercise Section 5</h4>
+                {/*https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/*/}
+                <button className={AppCss.Button}>CSS Button</button>
             </div>
         </div>
     );
